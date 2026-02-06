@@ -119,7 +119,7 @@ Client Response
    Edit `.env` file with your configuration:
 
    ```env
-   PORT=5000
+   PORT=5001
    NODE_ENV=development
    MONGODB_URI=mongodb://localhost:27017/marketplace
    JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
@@ -150,8 +150,8 @@ Client Response
    ```
 
 6. **Verify the server is running**
-   - Open browser: http://localhost:5000
-   - Health check: http://localhost:5000/health
+   - Open browser: http://localhost:5001
+   - Health check: http://localhost:5001/health
 
 ## 🌐 Deployment
 
@@ -165,71 +165,6 @@ Client Response
 6. Update your `.env` file:
    ```env
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/marketplace?retryWrites=true&w=majority
-   ```
-
-### Deploy to Render
-
-1. **Create account** at [Render](https://render.com)
-
-2. **Create new Web Service**
-   - Connect your Git repository
-   - Select "Node" environment
-   - Build command: `npm install`
-   - Start command: `npm start`
-
-3. **Add environment variables**
-   - `PORT`: (leave empty, Render auto-assigns)
-   - `NODE_ENV`: production
-   - `MONGODB_URI`: Your MongoDB Atlas connection string
-   - `JWT_SECRET`: Your secure secret key
-   - `JWT_EXPIRES_IN`: 7d
-
-4. **Deploy** - Render will automatically deploy your application
-
-### Deploy to Railway
-
-1. **Create account** at [Railway](https://railway.app)
-
-2. **Create new project**
-   - Select "Deploy from GitHub repo"
-   - Choose your repository
-
-3. **Add environment variables** in Settings
-   - Same variables as Render deployment
-
-4. **Deploy** - Railway automatically builds and deploys
-
-### Deploy to Fly.io
-
-1. **Install Fly CLI**
-
-   ```bash
-   curl -L https://fly.io/install.sh | sh
-   ```
-
-2. **Login to Fly**
-
-   ```bash
-   fly auth login
-   ```
-
-3. **Launch application**
-
-   ```bash
-   fly launch
-   ```
-
-4. **Set environment variables**
-
-   ```bash
-   fly secrets set MONGODB_URI="your_mongodb_uri"
-   fly secrets set JWT_SECRET="your_jwt_secret"
-   fly secrets set NODE_ENV="production"
-   ```
-
-5. **Deploy**
-   ```bash
-   fly deploy
    ```
 
 ## 📚 API Documentation
@@ -288,7 +223,7 @@ All API responses follow this standard format:
 **Register a user:**
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5001/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","email":"john@example.com","password":"password123"}'
 ```
@@ -296,7 +231,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Login:**
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"john@example.com","password":"password123"}'
 ```
@@ -304,7 +239,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 **Create a product (requires token):**
 
 ```bash
-curl -X POST http://localhost:5000/api/products \
+curl -X POST http://localhost:5001/api/products \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -d '{"name":"Product 1","description":"Description here","price":99.99,"stock":10}'
@@ -326,4 +261,4 @@ ISC
 
 ## 👤 Author
 
-Created as part of Specialized Platform Development course.
+Created by Lanisa as part of Specialized Platform Development course.
