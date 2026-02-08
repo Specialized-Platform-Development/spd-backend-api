@@ -5,7 +5,16 @@ import mongoose from "mongoose";
  */
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    let mongoUri = process.env.MONGODB_URI;
+
+    if (process.env.NODE_ENV === 'test' || !mongoUri) {
+      const { MongoMemoryServer } = await import('mongodb-memory-server');
+      const mongod = await MongoMemoryServer.create();
+      mongoUri = mongod.getUri();
+      console.log(`🧠 In-Memory MongoDB started at: ${mongoUri}`);
+    }
+
+    const conn = await mongoose.connect(mongoUri);
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
     console.log(`📦 Database: ${conn.connection.name}`);

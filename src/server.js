@@ -1,12 +1,16 @@
 import dotenv from "dotenv";
 import app from "./app.js";
 import connectDB from "./config/database.js";
+import seedDatabase from "./scripts/seed.js";
 
 // Load environment variables
 dotenv.config();
 
 // Connect to database
-connectDB();
+connectDB().then(() => {
+  // Seed database if needed (false = don't exit process)
+  seedDatabase(false);
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
